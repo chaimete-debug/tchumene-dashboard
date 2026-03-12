@@ -3,15 +3,6 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<!-- PWA -->
-<link rel="manifest" href="/manifest.json"/>
-<meta name="theme-color" content="#2d4a2d"/>
-<meta name="mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-<meta name="apple-mobile-web-app-title" content="Tchumene"/>
-<link rel="apple-touch-icon" href="/icons/icon-192.png"/>
-<meta name="description" content="Painel de Gestão — Igreja do Nazareno Tchumene"/>
 <title>Igreja DB Tchumene — Painel de Gestão</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -32,8 +23,8 @@
   --gold-light:#f0d890;
   --ink:#1a1a14;
   --ink2:#3d3d30;
-  --muted:#7a7460;
-  --muted2:#a09880;
+  --muted:#3d3a30;
+  --muted2:#5a5648;
   --border:#d8ceb8;
   --border2:#c8bea0;
   --red:#8b2020;
@@ -99,7 +90,7 @@ header{
   letter-spacing:.04em;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
-.church-sub{font-size:.68rem;color:rgba(255,255,255,.5);margin-top:1px}
+.church-sub{font-size:.72rem;color:rgba(255,255,255,.85);margin-top:1px;font-weight:500}
 .header-actions{display:flex;gap:8px;align-items:center}
 #btn-refresh{
   background:rgba(255,255,255,.1);
@@ -127,7 +118,7 @@ nav::-webkit-scrollbar{display:none}
   flex-shrink:0;
   background:transparent;
   border:none;border-bottom:3px solid transparent;
-  color:rgba(255,255,255,.55);
+  color:rgba(255,255,255,.85);
   padding:10px 14px 7px;
   font-size:.75rem;font-weight:500;
   cursor:pointer;transition:all .2s;
@@ -196,13 +187,13 @@ main{
   position:absolute;top:0;left:0;right:0;height:3px;
   background:linear-gradient(90deg,var(--forest),var(--forest3));
 }
-.kpi-label{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;margin-bottom:6px}
+.kpi-label{font-size:.75rem;color:#2a2820;text-transform:uppercase;letter-spacing:.09em;margin-bottom:6px;font-weight:700}
 .kpi-val{
   font-family:'Cormorant Garamond',serif;
-  font-size:1.9rem;font-weight:700;color:var(--forest);line-height:1;
+  font-size:2.1rem;font-weight:700;color:var(--forest);line-height:1;
 }
 .kpi-val.gold{color:var(--gold2)}
-.kpi-sub{font-size:.68rem;color:var(--muted2);margin-top:4px}
+.kpi-sub{font-size:.72rem;color:#3d3a30;margin-top:4px;font-weight:600}
 
 /* ══════════════════════════════════════════
    NEXT CULTO CARD
@@ -230,12 +221,12 @@ main{
   font-size:1.5rem;font-weight:700;color:white;
   margin-bottom:4px;
 }
-.next-dt{font-size:.82rem;color:rgba(255,255,255,.7);margin-bottom:14px}
+.next-dt{font-size:.88rem;color:rgba(255,255,255,.95);margin-bottom:14px;font-weight:600}
 .next-roles{
   display:grid;grid-template-columns:1fr 1fr;gap:10px;
 }
 @media(min-width:480px){.next-roles{grid-template-columns:repeat(4,1fr)}}
-.next-role-label{font-size:.62rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em}
+.next-role-label{font-size:.72rem;color:rgba(255,255,255,.9);text-transform:uppercase;letter-spacing:.08em;font-weight:700}
 .next-role-val{font-size:.82rem;color:white;font-weight:600;margin-top:2px}
 .next-anuncios{
   margin-top:14px;
@@ -262,12 +253,12 @@ main{
 }
 .card-title{
   font-family:'Cormorant Garamond',serif;
-  font-size:1rem;font-weight:700;color:var(--forest);
+  font-size:1.05rem;font-weight:700;color:var(--forest);
 }
-.card-date{font-size:.7rem;color:var(--muted);margin-top:2px}
+.card-date{font-size:.75rem;color:#3a3830;margin-top:2px;font-weight:600}
 .card-body{display:flex;flex-direction:column;gap:5px}
 .field{display:flex;gap:8px;align-items:baseline}
-.field-l{font-size:.68rem;color:var(--muted);min-width:100px;flex-shrink:0;text-transform:uppercase;letter-spacing:.05em}
+.field-l{font-size:.75rem;color:#2a2820;min-width:100px;flex-shrink:0;text-transform:uppercase;letter-spacing:.05em;font-weight:700}
 .field-v{font-size:.82rem;color:var(--ink2);line-height:1.4}
 .field-v.bold{font-weight:600;color:var(--ink)}
 .field-v.pos{color:var(--green);font-weight:600}
@@ -356,7 +347,7 @@ tfoot td.num{text-align:right;font-variant-numeric:tabular-nums}
 .bar-fill.forest{background:linear-gradient(90deg,var(--forest),var(--forest3))}
 .bar-fill.gold{background:linear-gradient(90deg,var(--gold),var(--gold3))}
 .bar-fill.red{background:linear-gradient(90deg,#8b2020,#c43030)}
-.bar-val{font-size:.7rem;color:var(--muted);min-width:60px;text-align:right;font-variant-numeric:tabular-nums}
+.bar-val{font-size:.75rem;color:#2a2820;min-width:60px;text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
 
 /* Sparkline */
 .sparkline{display:flex;align-items:flex-end;gap:3px;height:48px}
@@ -386,7 +377,7 @@ tfoot td.num{text-align:right;font-variant-numeric:tabular-nums}
 }
 .config-panel p{font-size:.78rem;color:var(--muted);margin-bottom:16px;line-height:1.5}
 .cfg-row{margin-bottom:12px}
-.cfg-row label{display:block;font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;font-weight:600}
+.cfg-row label{display:block;font-size:.75rem;color:#2a2820;text-transform:uppercase;letter-spacing:.07em;margin-bottom:4px;font-weight:700}
 .cfg-row input{
   width:100%;
   background:var(--parchment);
@@ -452,7 +443,7 @@ tfoot td.num{text-align:right;font-variant-numeric:tabular-nums}
   display:flex;flex-wrap:wrap;gap:8px;
   margin-bottom:16px;align-items:center;
 }
-.filter-bar label{font-size:.72rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.07em}
+.filter-bar label{font-size:.78rem;color:#2a2820;font-weight:700;text-transform:uppercase;letter-spacing:.07em}
 .filter-bar select,.filter-bar input[type=month]{
   background:var(--white);
   border:1px solid var(--border2);
@@ -1318,16 +1309,6 @@ function renderDizimos(){
 // ══════════════════════════════════════════
 loadCfgInputs();
 loadAll();
-</script>
-<!-- PWA Service Worker registration -->
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('SW registered:', reg.scope))
-      .catch(err => console.warn('SW registration failed:', err));
-  });
-}
 </script>
 </body>
 </html>
