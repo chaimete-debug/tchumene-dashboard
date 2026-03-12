@@ -495,7 +495,7 @@ tfoot td.num{text-align:right;font-variant-numeric:tabular-nums}
     <button class="nav-btn" onclick="show('visitantes')">Visitantes</button>
     <button class="nav-btn" onclick="show('financeiro')">Financeiro</button>
     <button class="nav-btn" onclick="show('dizimos')">Dízimos</button>
-    <button class="nav-btn" onclick="show('config')">⚙ Config</button>
+    <button class="nav-btn" onclick="show('config')" style="display:none">⚙ Config</button>
   </nav>
 </header>
 
@@ -781,16 +781,18 @@ tfoot td.num{text-align:right;font-variant-numeric:tabular-nums}
 // STATE
 // ══════════════════════════════════════════
 const CFG = 'dbtchumene_v3';
+const HARDCODED_URL = 'https://script.google.com/macros/s/AKfycbzG8CAG337lDtKuO95ffPBzqCDz5CffoQeixw-3QFvHsZj9M5hVH-qJIphaTGrV-v5r/exec';
 let DATA = { plano:[], relatorio:[], visitantes:[], financeiro:[], dizimos:[] };
 
 // ══════════════════════════════════════════
-// CONFIG
+// CONFIG — URL hardcoded, saldos still in localStorage
 // ══════════════════════════════════════════
-function getCfg(){ try{ return JSON.parse(localStorage.getItem(CFG))||{}; }catch{ return {}; } }
+function getCfg(){
+  try{ const c = JSON.parse(localStorage.getItem(CFG))||{}; c['url_webapp'] = HARDCODED_URL; return c; }
+  catch{ return { url_webapp: HARDCODED_URL }; }
+}
 function saveConfig(){
   const c = getCfg();
-  const el = document.getElementById('url-webapp');
-  if(el) c['url_webapp'] = el.value.trim();
   document.querySelectorAll('[data-saldo]').forEach(el=>{
     c[el.dataset.saldo] = parseFloat(el.value)||0;
   });
@@ -799,9 +801,8 @@ function saveConfig(){
   loadAll();
 }
 function loadCfgInputs(){
-  const c = getCfg();
   const el = document.getElementById('url-webapp');
-  if(el) el.value = c['url_webapp']||'';
+  if(el) el.value = HARDCODED_URL;
 }
 
 // ══════════════════════════════════════════
@@ -887,10 +888,9 @@ async function loadAll(){
   document.getElementById('statusbar').textContent = 'A carregar dados…';
 
   if(!wa){
-    document.getElementById('statusbar').textContent = '⚠️ Configure o URL do Web App no separador ⚙ Config';
-    document.getElementById('last-upd').textContent = 'Sem ligação — configure o Web App URL';
+    document.getElementById('statusbar').textContent = '⚠️ URL não configurado';
+    document.getElementById('last-upd').textContent = 'Erro de configuração';
     btn.classList.remove('spin');
-    show('config');
     return;
   }
 
