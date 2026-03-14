@@ -181,7 +181,7 @@
 
     .filters{
       display:grid;
-      grid-template-columns:1.2fr 1fr 1fr auto auto;
+      grid-template-columns:1fr 1fr auto auto;
       gap:14px;
       margin-top:16px;
     }
@@ -405,7 +405,7 @@
 
     @media (max-width: 1300px){
       .kpi-grid{grid-template-columns:repeat(3,1fr)}
-      .filters{grid-template-columns:1fr 1fr 1fr auto auto}
+      .filters{grid-template-columns:1fr 1fr auto auto}
     }
 
     @media (max-width: 1100px){
@@ -483,11 +483,6 @@
       </section>
 
       <section class="filters">
-        <div class="panel filter-card">
-          <label for="churchSelect">Igreja</label>
-          <select id="churchSelect"></select>
-        </div>
-
         <div class="panel filter-card">
           <label for="yearSelect">Ano</label>
           <select id="yearSelect">
@@ -798,7 +793,6 @@
       heroLastUpdate: document.getElementById("heroLastUpdate"),
       inlineChurchName: document.getElementById("inlineChurchName"),
       churchLinkPill: document.getElementById("churchLinkPill"),
-      churchSelect: document.getElementById("churchSelect"),
       yearSelect: document.getElementById("yearSelect"),
       monthSelect: document.getElementById("monthSelect"),
       applyFiltersBtn: document.getElementById("applyFiltersBtn"),
@@ -835,19 +829,19 @@
       const authRaw = localStorage.getItem("church_auth");
 
       if (!authRaw) {
-        window.location.href = "/login.html";
+        window.location.href = "/login";
         return false;
       }
 
       try {
         const auth = JSON.parse(authRaw);
         if (!auth.church || auth.church !== requestedChurch) {
-          window.location.href = "/login.html";
+          window.location.href = "/login";
           return false;
         }
         return true;
       } catch {
-        window.location.href = "/login.html";
+        window.location.href = "/login";
         return false;
       }
     }
@@ -877,10 +871,10 @@
 
     function formatMoney(value) {
       const num = typeof value === "number" ? value : parseMoney(value);
-      return num.toLocaleString("pt-PT", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      });
+      const fixed = num.toFixed(2);
+      const [intPart, decPart] = fixed.split(".");
+      const withThousands = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      return `${withThousands},${decPart}`;
     }
 
     function cleanTime(value) {
@@ -954,13 +948,6 @@
         if (m) return Number(m[1]);
       }
       return null;
-    }
-
-    function populateChurchSelect() {
-      els.churchSelect.innerHTML = Object.entries(CHURCHES)
-        .map(([code, cfg]) => `<option value="${code}">${cfg.name}</option>`)
-        .join("");
-      els.churchSelect.value = getChurchCodeFromUrl();
     }
 
     function populateYearSelect() {
@@ -1455,7 +1442,7 @@
     }
 
     async function loadDashboard() {
-      const churchCode = els.churchSelect.value || getChurchCodeFromUrl();
+      const churchCode = getChurchCodeFromUrl();
       setChurchInUrl(churchCode);
       updateChurchUi(churchCode);
       showError("");
@@ -1496,14 +1483,8 @@
     function init() {
       if (!requireAuth()) return;
 
-      populateChurchSelect();
       const currentChurch = getChurchCodeFromUrl();
-      els.churchSelect.value = currentChurch;
       updateChurchUi(currentChurch);
-
-      els.churchSelect.addEventListener("change", () => {
-        window.location.href = "/login.html";
-      });
 
       els.applyFiltersBtn.addEventListener("click", applyFilters);
       els.reloadBtn.addEventListener("click", loadDashboard);
@@ -1512,7 +1493,7 @@
       if (logoutBtn) {
         logoutBtn.addEventListener("click", () => {
           localStorage.removeItem("church_auth");
-          window.location.href = "/login.html";
+          window.location.href = "/login";
         });
       }
 
