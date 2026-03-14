@@ -33,7 +33,6 @@
       color:var(--text);
       min-height:100%;
     }
-
     body{min-height:100vh}
 
     .app{
@@ -807,25 +806,7 @@
     }
 
     function requireAuth() {
-      const requestedChurch = getChurchCodeFromUrl();
-      const authRaw = localStorage.getItem("church_auth");
-
-      if (!authRaw) {
-        window.location.href = "/login";
-        return false;
-      }
-
-      try {
-        const auth = JSON.parse(authRaw);
-        if (!auth.church || auth.church !== requestedChurch) {
-          window.location.href = "/login";
-          return false;
-        }
-        return true;
-      } catch {
-        window.location.href = "/login";
-        return false;
-      }
+      return true;
     }
 
     function parseMoney(value) {
@@ -1456,7 +1437,7 @@
       if (logoutBtn) {
         logoutBtn.addEventListener("click", () => {
           localStorage.removeItem("church_auth");
-          window.location.href = "/login";
+          window.location.href = "/login.html";
         });
       }
 
