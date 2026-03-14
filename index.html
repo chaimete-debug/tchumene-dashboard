@@ -22,12 +22,19 @@
       --warning:#b45309;
       --shadow:0 12px 36px rgba(15,23,42,.08);
       --radius:18px;
-      --radius-sm:14px;
       --sidebar-w:270px;
     }
 
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
+    html,body{
+      margin:0;
+      padding:0;
+      font-family:Arial,Helvetica,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      min-height:100%;
+    }
+
     body{min-height:100vh}
 
     .app{
@@ -39,7 +46,7 @@
     .sidebar{
       background:linear-gradient(180deg,#162b66,#1f3f98);
       color:#fff;
-      padding:22px 18px;
+      padding:20px 16px;
       position:sticky;
       top:0;
       height:100vh;
@@ -49,37 +56,38 @@
     .brand{
       display:flex;
       align-items:center;
-      gap:14px;
-      margin-bottom:24px;
+      gap:12px;
+      margin-bottom:22px;
     }
 
     .brand img{
-      width:58px;
-      height:58px;
+      width:56px;
+      height:56px;
       object-fit:contain;
       background:rgba(255,255,255,.12);
       border-radius:16px;
       padding:6px;
+      flex:0 0 auto;
     }
 
     .brand h1{
       margin:0;
-      font-size:1.15rem;
+      font-size:1.08rem;
       line-height:1.2;
     }
 
     .brand p{
       margin:6px 0 0;
       color:rgba(255,255,255,.82);
-      font-size:.9rem;
+      font-size:.88rem;
     }
 
     .side-group-title{
-      font-size:.76rem;
+      font-size:.75rem;
       text-transform:uppercase;
       letter-spacing:.08em;
-      opacity:.7;
-      margin:22px 8px 8px;
+      opacity:.75;
+      margin:20px 8px 8px;
     }
 
     .nav{
@@ -93,10 +101,10 @@
       border:none;
       background:transparent;
       color:#fff;
-      padding:13px 14px;
+      padding:12px 13px;
       border-radius:14px;
       cursor:pointer;
-      font-size:.96rem;
+      font-size:.95rem;
       transition:.2s ease;
     }
 
@@ -111,10 +119,10 @@
     }
 
     .sidebar-footer{
-      margin-top:28px;
-      padding-top:18px;
+      margin-top:24px;
+      padding-top:16px;
       border-top:1px solid rgba(255,255,255,.15);
-      font-size:.88rem;
+      font-size:.86rem;
       color:rgba(255,255,255,.8);
     }
 
@@ -127,32 +135,33 @@
     }
 
     .main{
-      padding:22px;
+      padding:20px;
       overflow:auto;
     }
 
     .hero{
       background:linear-gradient(135deg,var(--primary),var(--primary-2));
       color:#fff;
-      border-radius:24px;
-      padding:20px;
+      border-radius:22px;
+      padding:18px;
       box-shadow:var(--shadow);
       display:flex;
       justify-content:space-between;
-      gap:16px;
+      gap:14px;
       align-items:flex-start;
       flex-wrap:wrap;
     }
 
     .hero-left h2{
       margin:0;
-      font-size:1.6rem;
+      font-size:1.5rem;
+      line-height:1.2;
     }
 
     .hero-left p{
       margin:8px 0 0;
       opacity:.92;
-      font-size:.98rem;
+      font-size:.96rem;
     }
 
     .hero-meta{
@@ -164,9 +173,9 @@
     .chip{
       background:rgba(255,255,255,.12);
       border:1px solid rgba(255,255,255,.18);
-      padding:11px 14px;
+      padding:10px 13px;
       border-radius:999px;
-      font-size:.92rem;
+      font-size:.9rem;
       white-space:nowrap;
     }
 
@@ -182,7 +191,7 @@
       border:1px solid var(--line);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
-      padding:16px;
+      padding:15px;
     }
 
     .filter-card label{
@@ -235,19 +244,20 @@
 
     .kpi .label{
       color:var(--muted);
-      font-size:.86rem;
+      font-size:.84rem;
       margin-bottom:10px;
     }
 
     .kpi .value{
-      font-size:1.8rem;
+      font-size:1.65rem;
       font-weight:800;
       line-height:1.05;
+      word-break:break-word;
     }
 
     .kpi .sub{
       margin-top:8px;
-      font-size:.86rem;
+      font-size:.84rem;
       color:var(--muted);
     }
 
@@ -271,13 +281,13 @@
 
     .section-header h3{
       margin:0;
-      font-size:1.15rem;
+      font-size:1.08rem;
     }
 
     .section-header p{
       margin:4px 0 0;
       color:var(--muted);
-      font-size:.92rem;
+      font-size:.9rem;
     }
 
     .two-col{
@@ -299,12 +309,12 @@
     }
 
     .chart-card{
-      min-height:360px;
+      min-height:340px;
     }
 
     .chart-wrap{
       position:relative;
-      height:300px;
+      height:290px;
       width:100%;
     }
 
@@ -313,19 +323,20 @@
       border:1px solid var(--line);
       border-radius:14px;
       background:#fff;
+      -webkit-overflow-scrolling:touch;
     }
 
     table{
       width:100%;
       border-collapse:collapse;
-      min-width:780px;
+      min-width:760px;
     }
 
     th,td{
-      padding:12px;
+      padding:11px;
       border-bottom:1px solid var(--line);
       text-align:left;
-      font-size:.92rem;
+      font-size:.9rem;
       vertical-align:top;
     }
 
@@ -391,14 +402,13 @@
     .muted{color:var(--muted)}
     .success{color:var(--success)}
     .danger{color:var(--danger)}
-    .warning{color:var(--warning)}
 
     @media (max-width: 1300px){
       .kpi-grid{grid-template-columns:repeat(3,1fr)}
       .filters{grid-template-columns:1fr 1fr 1fr auto auto}
     }
 
-    @media (max-width: 1050px){
+    @media (max-width: 1100px){
       .app{grid-template-columns:1fr}
       .sidebar{
         position:relative;
@@ -411,9 +421,16 @@
     @media (max-width: 720px){
       .main{padding:12px}
       .hero{padding:16px}
-      .hero-left h2{font-size:1.25rem}
+      .hero-left h2{font-size:1.2rem}
       .filters{grid-template-columns:1fr}
       .kpi-grid{grid-template-columns:1fr}
+      .brand h1{font-size:1rem}
+      .sidebar{padding:16px 12px}
+      .nav-btn{padding:11px 12px}
+      .panel{padding:13px}
+      .chart-wrap{height:250px}
+      table{min-width:620px}
+      th,td{padding:10px;font-size:.86rem}
     }
   </style>
 </head>
@@ -440,7 +457,7 @@
 
       <div class="side-group-title">Administração</div>
       <div class="nav">
-        <button class="nav-btn" disabled>Entrar (futuro)</button>
+        <button class="nav-btn" id="logoutBtn">Terminar sessão</button>
         <button class="nav-btn" disabled>Painel Admin (futuro)</button>
       </div>
 
@@ -753,13 +770,6 @@
       cmatola: { name: "Igreja do Nazareno Cidade da Matola" }
     };
 
-    const CHURCH_PINS = {
-      tchumene: "1111",
-      infulene: "2222",
-      boquisso: "3333",
-      cmatola: "4444"
-    };
-
     const DEFAULT_CHURCH = "tchumene";
     const MONTH_LABELS = ["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
 
@@ -820,6 +830,28 @@
       return CHURCHES[code] ? code : DEFAULT_CHURCH;
     }
 
+    function requireAuth() {
+      const requestedChurch = getChurchCodeFromUrl();
+      const authRaw = localStorage.getItem("church_auth");
+
+      if (!authRaw) {
+        window.location.href = "/login.html";
+        return false;
+      }
+
+      try {
+        const auth = JSON.parse(authRaw);
+        if (!auth.church || auth.church !== requestedChurch) {
+          window.location.href = "/login.html";
+          return false;
+        }
+        return true;
+      } catch {
+        window.location.href = "/login.html";
+        return false;
+      }
+    }
+
     function setChurchInUrl(churchCode) {
       const url = new URL(window.location.href);
       url.searchParams.set("church", churchCode);
@@ -875,25 +907,6 @@
     function showError(message="") {
       els.errorBox.textContent = message;
       els.errorBox.style.display = message ? "block" : "none";
-    }
-
-    function validateChurchPin(churchCode) {
-      const expectedPin = CHURCH_PINS[churchCode];
-      if (!expectedPin) return true;
-
-      const savedChurch = localStorage.getItem("church_locked");
-      if (savedChurch === churchCode) return true;
-
-      const pin = window.prompt(`Introduza o PIN para aceder a ${CHURCHES[churchCode].name}`);
-      if (pin === null) return false;
-
-      if (pin === expectedPin) {
-        localStorage.setItem("church_locked", churchCode);
-        return true;
-      }
-
-      alert("PIN inválido.");
-      return false;
     }
 
     async function fetchTab(churchCode, tab) {
@@ -1146,7 +1159,7 @@
         const m = detectMonth(row);
         if (!m) return;
         if (selectedYear !== "all" && y !== Number(selectedYear)) return;
-        totals[m-1] += Number(r["Total Participantes"] || 0);
+        totals[m-1] += Number(row["Total Participantes"] || 0);
       });
       return totals;
     }
@@ -1370,10 +1383,14 @@
     }
 
     function renderPlanoSection() {
+      const rows = state.filtered.plano && state.filtered.plano.length
+        ? state.filtered.plano
+        : state.raw.plano;
+
       renderSimpleTable(
         els.planoTableWrap,
         ["Data do Culto","Hora Início","Hora Fim","Tipo de Culto","Local","Dirigente","Pregador","Louvor","Acolhedores"],
-        state.filtered.plano.map(r => [
+        rows.map(r => [
           r["Data do Culto"] || "",
           cleanTime(r["Hora Início"]),
           cleanTime(r["Hora Fim"]),
@@ -1477,24 +1494,27 @@
     }
 
     function init() {
+      if (!requireAuth()) return;
+
       populateChurchSelect();
       const currentChurch = getChurchCodeFromUrl();
       els.churchSelect.value = currentChurch;
       updateChurchUi(currentChurch);
 
-      validateChurchPin(currentChurch);
-
       els.churchSelect.addEventListener("change", () => {
-        const churchCode = els.churchSelect.value;
-        if (!validateChurchPin(churchCode)) {
-          els.churchSelect.value = getChurchCodeFromUrl();
-          return;
-        }
-        loadDashboard();
+        window.location.href = "/login.html";
       });
 
       els.applyFiltersBtn.addEventListener("click", applyFilters);
       els.reloadBtn.addEventListener("click", loadDashboard);
+
+      const logoutBtn = document.getElementById("logoutBtn");
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+          localStorage.removeItem("church_auth");
+          window.location.href = "/login.html";
+        });
+      }
 
       setupNav();
 
