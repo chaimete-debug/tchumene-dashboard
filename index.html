@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Painel Igreja</title>
+
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#1a237e" />
+
+  <style>
+    :root{
+      --bg:#f4f7fb;
+      --card:#ffffff;
+      --text:#1e293b;
+      --muted:#64748b;
+      --primary:#1a237e;
+      --primary-2:#283593;
+      --border:#e2e8f0;
+      --ok:#0f766e;
+      --warn:#b45309;
+      --danger:#b91c1c;
+      --shadow:0 10px 30px rgba(15,23,42,.08);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
+    body{min-height:100vh}
+
+    .app{
+      max-width:1300px;
+      margin:0 auto;
+      padding:16px;
+    }
+
+    .topbar{
+      background:linear-gradient(135deg,var(--primary),var(--primary-2));
+      color:#fff;
+      border-radius:22px;
+      padding:18px;
+      box-shadow:var(--shadow);
+      display:flex;
+      gap:14px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+    }
+
+    .brand img{
+      width:56px;
+      height:56px;
+      object-fit:contain;
+      border-radius:14px;
+      background:rgba(255,255,255,.12);
+      padding:6px;
+    }
+
+    .brand-text{
+      min-width:0;
+    }
+
+    .brand-text h1{
+      margin:0;
+      font-size:1.2rem;
+      line-height:1.2;
+    }
+
+    .brand-text p{
+      margin:6px 0 0;
+      opacity:.9;
+      font-size:.92rem;
+    }
+
+    .meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .chip{
+      background:rgba(255,255,255,.14);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.18);
+      padding:10px 12px;
+      border-radius:999px;
+      font-size:.9rem;
+    }
+
+    .toolbar{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns:1fr auto auto;
+      gap:12px;
+    }
+
+    .toolbar-card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:14px;
+      box-shadow:var(--shadow);
+    }
+
+    .toolbar label{
+      display:block;
+      font-size:.85rem;
+      color:var(--muted);
+      margin-bottom:6px;
+    }
+
+    .toolbar input,.toolbar select,.toolbar button{
+      width:100%;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      font-size:.95rem;
+    }
+
+    .toolbar button{
+      background:var(--primary);
+      color:#fff;
+      border:none;
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    .toolbar button:hover{
+      background:var(--primary-2);
+    }
+
+    .status{
+      margin-top:14px;
+      font-size:.92rem;
+      color:var(--muted);
+    }
+
+    .status strong{color:var(--text)}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow:var(--shadow);
+    }
+
+    .kpi-title{
+      color:var(--muted);
+      font-size:.88rem;
+      margin-bottom:10px;
+    }
+
+    .kpi-value{
+      font-size:1.7rem;
+      font-weight:800;
+      line-height:1.1;
+    }
+
+    .kpi-sub{
+      margin-top:8px;
+      color:var(--muted);
+      font-size:.88rem;
+    }
+
+    .sections{
+      display:grid;
+      grid-template-columns:1.2fr 1fr;
+      gap:14px;
+      margin-top:14px;
+    }
+
+    .section-title{
+      margin:0 0 12px;
+      font-size:1rem;
+    }
+
+    .table-wrap{
+      overflow:auto;
+      border:1px solid var(--border);
+      border-radius:14px;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:700px;
+      background:#fff;
+    }
+
+    th,td{
+      padding:12px;
+      text-align:left;
+      border-bottom:1px solid var(--border);
+      font-size:.92rem;
+      vertical-align:top;
+    }
+
+    th{
+      background:#eef2ff;
+      color:#1e293b;
+      position:sticky;
+      top:0;
+      z-index:1;
+    }
+
+    .list{
+      display:grid;
+      gap:10px;
+    }
+
+    .list-item{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px;
+      background:#fff;
+    }
+
+    .list-item strong{
+      display:block;
+      margin-bottom:4px;
+    }
+
+    .muted{color:var(--muted)}
+    .ok{color:var(--ok)}
+    .warn{color:var(--warn)}
+    .danger{color:var(--danger)}
+
+    .footer{
+      margin:20px 0 10px;
+      text-align:center;
+      color:var(--muted);
+      font-size:.88rem;
+    }
+
+    .empty{
+      padding:20px;
+      text-align:center;
+      color:var(--muted);
+    }
+
+    .loading{
+      display:none;
+      margin-top:14px;
+      padding:14px;
+      border-radius:14px;
+      background:#e8eefc;
+      color:#1a237e;
+      font-weight:700;
+    }
+
+    .error{
+      display:none;
+      margin-top:14px;
+      padding:14px;
+      border-radius:14px;
+      background:#fee2e2;
+      color:#991b1b;
+      font-weight:700;
+    }
+
+    @media (max-width: 1100px){
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .sections{grid-template-columns:1fr}
+    }
+
+    @media (max-width: 720px){
+      .grid{grid-template-columns:1fr}
+      .toolbar{grid-template-columns:1fr}
+      .brand img{width:48px;height:48px}
+      .brand-text h1{font-size:1.05rem}
+      .kpi-value{font-size:1.45rem}
+      .app{padding:12px}
+      .topbar{padding:14px}
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <img src="/icons/icon-192.png" alt="Logo Igreja">
+        <div class="brand-text">
+          <h1 id="churchName">Igreja do Nazareno Tchumene</h1>
+          <p>Painel de gestão — Cultos, visitantes, finanças e escalas</p>
+        </div>
+      </div>
+
+      <div class="meta">
+        <div class="chip" id="churchCodeChip">Código: tchumene</div>
+        <div class="chip" id="lastUpdateChip">Actualização: —</div>
+      </div>
+    </header>
+
+    <section class="toolbar">
+      <div class="toolbar-card">
+        <label for="churchUrlBox">Ligação directa desta igreja</label>
+        <input id="churchUrlBox" type="text" readonly />
+      </div>
+
+      <div class="toolbar-card">
+        <label for="tabSelect">Tabela principal</label>
+        <select id="tabSelect">
+          <option value="financeiro">Financeiro</option>
+          <option value="relatorio">Relatório dos cultos</option>
+          <option value="visitantes">Visitantes</option>
+          <option value="plano">Plano de cultos e escalas</option>
+          <option value="dizimos">Dízimos (detalhe)</option>
+        </select>
+      </div>
+
+      <div class="toolbar-card">
+        <label>&nbsp;</label>
+        <button id="reloadBtn">Actualizar dados</button>
+      </div>
+    </section>
+
+    <div class="status">
+      Igreja activa: <strong id="churchNameInline">Igreja do Nazareno Tchumene</strong>
+    </div>
+
+    <div class="loading" id="loadingBox">A carregar dados...</div>
+    <div class="error" id="errorBox"></div>
+
+    <section class="grid">
+      <div class="card">
+        <div class="kpi-title">Movimentos financeiros</div>
+        <div class="kpi-value" id="kpiFinanceiroCount">0</div>
+        <div class="kpi-sub">Total de registos na aba financeira</div>
+      </div>
+
+      <div class="card">
+        <div class="kpi-title">Total financeiro MZN</div>
+        <div class="kpi-value" id="kpiFinanceiroTotal">0,00</div>
+        <div class="kpi-sub">Soma da coluna “Valor MZN”</div>
+      </div>
+
+      <div class="card">
+        <div class="kpi-title">Visitantes registados</div>
+        <div class="kpi-value" id="kpiVisitantesCount">0</div>
+        <div class="kpi-sub">Total da aba de visitantes</div>
+      </div>
+
+      <div class="card">
+        <div class="kpi-title">Cultos reportados</div>
+        <div class="kpi-value" id="kpiRelatorioCount">0</div>
+        <div class="kpi-sub">Total da aba de relatório</div>
+      </div>
+    </section>
+
+    <section class="sections">
+      <div class="card">
+        <h2 class="section-title">Tabela principal</h2>
+        <div class="table-wrap" id="mainTableWrap">
+          <div class="empty">Sem dados.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">Resumo rápido</h2>
+        <div class="list" id="summaryList">
+          <div class="list-item">
+            <strong>Nenhum resumo disponível</strong>
+            <span class="muted">Os dados aparecerão depois do carregamento.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      Painel PWA multi-igreja
+    </div>
+  </div>
+
+  <script>
+    const CHURCHES = {
+      tchumene: {
+        name: "Igreja do Nazareno Tchumene",
+        baseUrl: "https://script.google.com/macros/s/AKfycbzG8CAG337lDtKuO95ffPBzqCDz5CffoQeixw-3QFvHsZj9M5hVH-qJIphaTGrV-v5r/exec"
+      },
+      infulene: {
+        name: "Igreja do Nazareno Infulene",
+        baseUrl: "https://script.google.com/macros/s/AKfycbzInCudLSIH-UBitAuryj9h_LruM7keVdjSTysdDkeHlEBqNYyd0KANZ83z3b8C6ry5/exec"
+      },
+      boquisso: {
+        name: "Igreja do Nazareno Boquisso",
+        baseUrl: "https://script.google.com/macros/s/AKfycbwSCQxgQuGrSYLVv3isoD-YdSZ1y_zENVOBFnuHW9FL8GUXN8rYe3-9zOmApDPsL-dw/exec"
+      },
+      cmatola: {
+        name: "Igreja do Nazareno Cidade da Matola",
+        baseUrl: "https://script.google.com/macros/s/AKfycbzp_oe8MFAwiDAekiTj-9q5Ji0zzGyWLw0n0qm7ro6yzVE_Q89yOG7AOJyvKz2_8QvDOw/exec"
+      }
+    };
+
+    const DEFAULT_CHURCH = "tchumene";
+
+    const els = {
+      churchName: document.getElementById("churchName"),
+      churchNameInline: document.getElementById("churchNameInline"),
+      churchCodeChip: document.getElementById("churchCodeChip"),
+      lastUpdateChip: document.getElementById("lastUpdateChip"),
+      churchUrlBox: document.getElementById("churchUrlBox"),
+      tabSelect: document.getElementById("tabSelect"),
+      reloadBtn: document.getElementById("reloadBtn"),
+      loadingBox: document.getElementById("loadingBox"),
+      errorBox: document.getElementById("errorBox"),
+      mainTableWrap: document.getElementById("mainTableWrap"),
+      summaryList: document.getElementById("summaryList"),
+      kpiFinanceiroCount: document.getElementById("kpiFinanceiroCount"),
+      kpiFinanceiroTotal: document.getElementById("kpiFinanceiroTotal"),
+      kpiVisitantesCount: document.getElementById("kpiVisitantesCount"),
+      kpiRelatorioCount: document.getElementById("kpiRelatorioCount")
+    };
+
+    function getChurchCodeFromUrl() {
+      const params = new URLSearchParams(window.location.search);
+      const code = (params.get("church") || DEFAULT_CHURCH).trim().toLowerCase();
+      return CHURCHES[code] ? code : DEFAULT_CHURCH;
+    }
+
+    function getChurchConfig() {
+      const code = getChurchCodeFromUrl();
+      return { code, ...CHURCHES[code] };
+    }
+
+    function showLoading(show) {
+      els.loadingBox.style.display = show ? "block" : "none";
+    }
+
+    function showError(message = "") {
+      els.errorBox.textContent = message;
+      els.errorBox.style.display = message ? "block" : "none";
+    }
+
+    function formatNumber(value) {
+      const num = Number(value || 0);
+      return num.toLocaleString("pt-PT", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function parseMoney(value) {
+      if (value === null || value === undefined || value === "") return 0;
+      const normalized = String(value).replace(/\s/g, "").replace(/\./g, "").replace(",", ".");
+      const num = Number(normalized);
+      return Number.isFinite(num) ? num : 0;
+    }
+
+    async function fetchTab(baseUrl, tab) {
+      const url = `${baseUrl}?tab=${encodeURIComponent(tab)}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`Falha ao carregar ${tab}`);
+      const data = await res.json();
+      if (data && data.error) throw new Error(data.error);
+      return Array.isArray(data) ? data : [];
+    }
+
+    function renderTable(rows) {
+      if (!rows.length) {
+        els.mainTableWrap.innerHTML = '<div class="empty">Sem dados nesta tabela.</div>';
+        return;
+      }
+
+      const headers = Object.keys(rows[0]);
+      const thead = `<thead><tr>${headers.map(h => `<th>${escapeHtml(h)}</th>`).join("")}</tr></thead>`;
+      const tbody = rows.map(row => {
+        return `<tr>${headers.map(h => `<td>${escapeHtml(row[h] ?? "")}</td>`).join("")}</tr>`;
+      }).join("");
+
+      els.mainTableWrap.innerHTML = `<table>${thead}<tbody>${tbody}</tbody></table>`;
+    }
+
+    function renderSummary(financeiro, visitantes, relatorio, plano, dizimos) {
+      const totalFinanceiro = financeiro.reduce((sum, r) => sum + parseMoney(r["Valor MZN"]), 0);
+
+      const latestVisitors = visitantes.slice(-5).reverse();
+      const latestCultos = relatorio.slice(-5).reverse();
+
+      let html = "";
+
+      html += `
+        <div class="list-item">
+          <strong>Total financeiro acumulado</strong>
+          <span class="ok">${formatNumber(totalFinanceiro)} MZN</span>
+        </div>
+      `;
+
+      html += `
+        <div class="list-item">
+          <strong>Total de linhas em Plano</strong>
+          <span class="muted">${plano.length}</span>
+        </div>
+      `;
+
+      html += `
+        <div class="list-item">
+          <strong>Total de linhas em Dízimos (detalhe)</strong>
+          <span class="muted">${dizimos.length}</span>
+        </div>
+      `;
+
+      if (latestVisitors.length) {
+        html += `
+          <div class="list-item">
+            <strong>Últimos visitantes</strong>
+            ${latestVisitors.map(v => `
+              <div class="muted">
+                ${(v["Nome"] || "—")} — ${(v["Data da Visita"] || "—")}
+              </div>
+            `).join("")}
+          </div>
+        `;
+      }
+
+      if (latestCultos.length) {
+        html += `
+          <div class="list-item">
+            <strong>Últimos relatórios de culto</strong>
+            ${latestCultos.map(c => `
+              <div class="muted">
+                ${(c["Tipo de Culto"] || "—")} — ${(c["Data do Culto"] || "—")}
+              </div>
+            `).join("")}
+          </div>
+        `;
+      }
+
+      els.summaryList.innerHTML = html || `
+        <div class="list-item">
+          <strong>Nenhum resumo disponível</strong>
+          <span class="muted">Sem dados carregados.</span>
+        </div>
+      `;
+    }
+
+    function renderKpis(financeiro, visitantes, relatorio) {
+      const totalFinanceiro = financeiro.reduce((sum, r) => sum + parseMoney(r["Valor MZN"]), 0);
+
+      els.kpiFinanceiroCount.textContent = financeiro.length.toLocaleString("pt-PT");
+      els.kpiFinanceiroTotal.textContent = formatNumber(totalFinanceiro);
+      els.kpiVisitantesCount.textContent = visitantes.length.toLocaleString("pt-PT");
+      els.kpiRelatorioCount.textContent = relatorio.length.toLocaleString("pt-PT");
+    }
+
+    function updateChurchUi(church) {
+      els.churchName.textContent = church.name;
+      els.churchNameInline.textContent = church.name;
+      els.churchCodeChip.textContent = `Código: ${church.code}`;
+      els.churchUrlBox.value = `${location.origin}${location.pathname}?church=${church.code}`;
+      document.title = `${church.name} — Painel`;
+    }
+
+    function updateLastUpdate() {
+      const now = new Date();
+      els.lastUpdateChip.textContent = `Actualização: ${now.toLocaleString("pt-PT")}`;
+    }
+
+    function escapeHtml(value) {
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    async function loadDashboard() {
+      const church = getChurchConfig();
+      updateChurchUi(church);
+      showError("");
+      showLoading(true);
+
+      try {
+        const [plano, relatorio, visitantes, financeiro, dizimos] = await Promise.all([
+          fetchTab(church.baseUrl, "plano"),
+          fetchTab(church.baseUrl, "relatorio"),
+          fetchTab(church.baseUrl, "visitantes"),
+          fetchTab(church.baseUrl, "financeiro"),
+          fetchTab(church.baseUrl, "dizimos")
+        ]);
+
+        const selectedTab = els.tabSelect.value;
+        const tabMap = { plano, relatorio, visitantes, financeiro, dizimos };
+
+        renderKpis(financeiro, visitantes, relatorio);
+        renderSummary(financeiro, visitantes, relatorio, plano, dizimos);
+        renderTable(tabMap[selectedTab] || []);
+        updateLastUpdate();
+
+        localStorage.setItem("church_dashboard_cache", JSON.stringify({
+          church: church.code,
+          plano, relatorio, visitantes, financeiro, dizimos,
+          savedAt: new Date().toISOString()
+        }));
+      } catch (err) {
+        showError(`Erro ao carregar dados: ${err.message}`);
+
+        const cached = localStorage.getItem("church_dashboard_cache");
+        if (cached) {
+          try {
+            const parsed = JSON.parse(cached);
+            if (parsed.church === church.code) {
+              const { plano = [], relatorio = [], visitantes = [], financeiro = [], dizimos = [] } = parsed;
+              const selectedTab = els.tabSelect.value;
+              const tabMap = { plano, relatorio, visitantes, financeiro, dizimos };
+              renderKpis(financeiro, visitantes, relatorio);
+              renderSummary(financeiro, visitantes, relatorio, plano, dizimos);
+              renderTable(tabMap[selectedTab] || []);
+              els.lastUpdateChip.textContent = `Cache: ${new Date(parsed.savedAt).toLocaleString("pt-PT")}`;
+            }
+          } catch (_) {}
+        }
+      } finally {
+        showLoading(false);
+      }
+    }
+
+    els.reloadBtn.addEventListener("click", loadDashboard);
+
+    els.tabSelect.addEventListener("change", () => {
+      const cached = localStorage.getItem("church_dashboard_cache");
+      if (!cached) return loadDashboard();
+
+      try {
+        const parsed = JSON.parse(cached);
+        const church = getChurchConfig();
+        if (parsed.church !== church.code) return loadDashboard();
+
+        const tabMap = {
+          plano: parsed.plano || [],
+          relatorio: parsed.relatorio || [],
+          visitantes: parsed.visitantes || [],
+          financeiro: parsed.financeiro || [],
+          dizimos: parsed.dizimos || []
+        };
+        renderTable(tabMap[els.tabSelect.value] || []);
+      } catch {
+        loadDashboard();
+      }
+    });
+
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("/sw.js").catch(() => {});
+      });
+    }
+
+    loadDashboard();
+  </script>
+</body>
+</html>
