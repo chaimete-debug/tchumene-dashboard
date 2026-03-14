@@ -7,183 +7,188 @@
   <meta name="theme-color" content="#1e3a8a" />
   <style>
     :root{
-      --bg:#f3f6fb;
+      --bg:#eef3fb;
       --card:#ffffff;
       --line:#dbe3ef;
       --text:#13233f;
       --muted:#64748b;
       --primary:#1e3a8a;
-      --primary-2:#2747b0;
+      --primary2:#2747b0;
       --shadow:0 16px 40px rgba(15,23,42,.10);
-      --radius:22px;
     }
-
     *{box-sizing:border-box}
     html,body{
       margin:0;
       padding:0;
       min-height:100%;
       font-family:Arial,Helvetica,sans-serif;
-      background:linear-gradient(135deg,#eef4ff,#f8fbff);
+      background:linear-gradient(135deg,#f8fbff 0%,#eef3fb 100%);
       color:var(--text);
     }
-
     body{
       min-height:100vh;
       display:grid;
       place-items:center;
-      padding:20px;
+      padding:16px;
     }
-
     .shell{
       width:100%;
-      max-width:1040px;
+      max-width:1050px;
       display:grid;
-      grid-template-columns:1.1fr .9fr;
+      grid-template-columns:1.05fr .95fr;
       background:var(--card);
       border:1px solid var(--line);
       border-radius:28px;
       overflow:hidden;
       box-shadow:var(--shadow);
     }
-
     .hero{
       background:linear-gradient(135deg,#162b66,#1f3f98);
       color:#fff;
-      padding:34px 30px;
+      padding:32px 28px;
       display:flex;
       flex-direction:column;
       justify-content:space-between;
-      min-height:560px;
+      min-height:580px;
     }
-
     .hero-top{
       display:flex;
       gap:14px;
       align-items:center;
     }
-
     .hero-top img{
-      width:64px;
-      height:64px;
+      width:72px;
+      height:72px;
       object-fit:contain;
-      border-radius:18px;
       background:rgba(255,255,255,.12);
-      padding:7px;
+      border-radius:18px;
+      padding:8px;
+      flex:0 0 auto;
     }
-
     .hero h1{
       margin:0;
-      font-size:1.55rem;
-      line-height:1.15;
+      font-size:1.7rem;
+      line-height:1.1;
     }
-
     .hero p{
       margin:8px 0 0;
-      color:rgba(255,255,255,.88);
+      color:rgba(255,255,255,.9);
     }
-
     .hero-points{
       display:grid;
-      gap:12px;
+      gap:14px;
       margin-top:28px;
     }
-
     .hero-point{
-      padding:14px 16px;
-      border:1px solid rgba(255,255,255,.12);
+      padding:15px 16px;
+      border:1px solid rgba(255,255,255,.14);
       background:rgba(255,255,255,.08);
-      border-radius:16px;
+      border-radius:18px;
     }
-
     .hero-point strong{
       display:block;
       margin-bottom:6px;
     }
-
+    .hero-bottom{
+      color:rgba(255,255,255,.84);
+      font-size:.92rem;
+    }
     .form-wrap{
-      padding:34px 28px;
+      padding:30px 24px;
       display:flex;
       flex-direction:column;
       justify-content:center;
     }
-
+    .badge{
+      display:inline-flex;
+      width:max-content;
+      padding:7px 12px;
+      border-radius:999px;
+      background:#edf4ff;
+      color:#1e3a8a;
+      font-size:.85rem;
+      font-weight:700;
+      margin-bottom:14px;
+    }
     .form-wrap h2{
       margin:0 0 8px;
-      font-size:1.45rem;
+      font-size:1.5rem;
     }
-
-    .form-wrap .sub{
-      margin:0 0 24px;
+    .sub{
+      margin:0 0 22px;
       color:var(--muted);
+      line-height:1.5;
     }
-
     .field{
-      margin-bottom:16px;
+      margin-bottom:15px;
     }
-
     .field label{
       display:block;
-      font-size:.9rem;
-      margin-bottom:7px;
+      margin:0 0 7px;
       color:var(--muted);
+      font-size:.92rem;
     }
-
     .field select,
-    .field input{
-      width:100%;
-      padding:13px 14px;
-      border:1px solid var(--line);
-      border-radius:16px;
-      font-size:1rem;
-      background:#fff;
-    }
-
+    .field input,
     .btn{
       width:100%;
-      padding:14px 16px;
+      padding:14px;
+      border-radius:15px;
+      font-size:16px;
+    }
+    .field select,
+    .field input{
+      border:1px solid var(--line);
+      background:#fff;
+      color:var(--text);
+      outline:none;
+    }
+    .field select:focus,
+    .field input:focus{
+      border-color:#9bb4f7;
+      box-shadow:0 0 0 4px rgba(30,58,138,.08);
+    }
+    .btn{
       border:none;
-      border-radius:16px;
       background:var(--primary);
       color:#fff;
-      font-size:1rem;
       font-weight:700;
       cursor:pointer;
+      margin-top:2px;
     }
-
-    .btn:hover{
-      background:var(--primary-2);
+    .btn.secondary{
+      background:#fff;
+      color:var(--primary);
+      border:1px solid var(--line);
+      margin-top:10px;
     }
-
     .msg{
       display:none;
-      margin-top:14px;
+      margin-top:12px;
       padding:12px 14px;
-      border-radius:14px;
-      font-size:.95rem;
+      border-radius:12px;
       font-weight:700;
     }
-
-    .msg.error{
+    .msg.err{
       background:#fee2e2;
       color:#991b1b;
     }
-
     .msg.ok{
       background:#dcfce7;
       color:#166534;
     }
-
-    .footer-note{
-      margin-top:18px;
-      color:var(--muted);
+    .note{
+      margin-top:16px;
       font-size:.88rem;
+      color:var(--muted);
+      line-height:1.5;
       text-align:center;
     }
-
     @media (max-width: 900px){
       .shell{grid-template-columns:1fr}
-      .hero{min-height:auto}
+      .hero{min-height:auto;padding:24px 20px}
+      .form-wrap{padding:24px 18px}
+      .hero h1{font-size:1.45rem}
     }
   </style>
 </head>
@@ -192,7 +197,7 @@
     <section class="hero">
       <div>
         <div class="hero-top">
-          <img src="/icons/icon-192.png" alt="Logo">
+          <img src="/logo-igreja.png" alt="Logo Igreja">
           <div>
             <h1>Painel Multi-Igreja</h1>
             <p>Acesso protegido por igreja e PIN.</p>
@@ -206,23 +211,24 @@
           </div>
           <div class="hero-point">
             <strong>Separação por igreja</strong>
-            <span>Cada igreja entra com o seu PIN e acede apenas ao seu contexto.</span>
+            <span>Cada igreja entra com o seu PIN e acede ao seu próprio contexto.</span>
           </div>
           <div class="hero-point">
             <strong>Preparado para crescer</strong>
-            <span>Base pronta para login/admin, permissões e branding por igreja.</span>
+            <span>Base pronta para permissões, admin e novas igrejas.</span>
           </div>
         </div>
       </div>
 
-      <div>
-        <p>Projecto preparado para Tchumene, Infulene, Boquisso e Cidade da Matola.</p>
+      <div class="hero-bottom">
+        Sistema preparado para Tchumene, Infulene, Boquisso e Cidade da Matola.
       </div>
     </section>
 
     <section class="form-wrap">
+      <div class="badge">Acesso seguro</div>
       <h2>Entrar no sistema</h2>
-      <p class="sub">Seleccione a igreja e introduza o PIN.</p>
+      <p class="sub">Seleccione a igreja e introduza o PIN para abrir o painel correspondente.</p>
 
       <div class="field">
         <label for="churchSelect">Igreja</label>
@@ -240,46 +246,50 @@
       </div>
 
       <button class="btn" id="loginBtn">Entrar</button>
+      <button class="btn secondary" id="exitBtn">Sair</button>
 
-      <div class="msg error" id="errorBox"></div>
-      <div class="msg ok" id="okBox"></div>
+      <div id="errorBox" class="msg err"></div>
+      <div id="okBox" class="msg ok"></div>
 
-      <div class="footer-note">
-        O acesso ao dashboard passa primeiro por esta página.
+      <div class="note">
+        Para a apresentação, entre por esta página e depois avance para o dashboard da igreja.
       </div>
     </section>
   </div>
 
   <script>
     const CHURCHES = {
-      tchumene: { name: "Igreja do Nazareno Tchumene", pin: "1111" },
-      infulene: { name: "Igreja do Nazareno Infulene", pin: "2222" },
-      boquisso: { name: "Igreja do Nazareno Boquisso", pin: "3333" },
-      cmatola: { name: "Igreja do Nazareno Cidade da Matola", pin: "4444" }
+      tchumene: { pin: "1111" },
+      infulene: { pin: "2222" },
+      boquisso: { pin: "3333" },
+      cmatola: { pin: "4444" }
     };
 
     const churchSelect = document.getElementById("churchSelect");
     const pinInput = document.getElementById("pinInput");
     const loginBtn = document.getElementById("loginBtn");
+    const exitBtn = document.getElementById("exitBtn");
     const errorBox = document.getElementById("errorBox");
     const okBox = document.getElementById("okBox");
 
     function showError(msg) {
-      errorBox.textContent = msg;
+      errorBox.textContent = msg || "";
       errorBox.style.display = msg ? "block" : "none";
+      okBox.style.display = "none";
     }
 
     function showOk(msg) {
-      okBox.textContent = msg;
+      okBox.textContent = msg || "";
       okBox.style.display = msg ? "block" : "none";
+      errorBox.style.display = "none";
     }
 
     function login() {
-      showError("");
-      showOk("");
-
       const church = churchSelect.value;
       const pin = pinInput.value.trim();
+
+      showError("");
+      showOk("");
 
       if (!CHURCHES[church]) {
         showError("Igreja inválida.");
@@ -288,6 +298,8 @@
 
       if (pin !== CHURCHES[church].pin) {
         showError("PIN inválido.");
+        pinInput.focus();
+        pinInput.select();
         return;
       }
 
@@ -296,13 +308,23 @@
         ts: Date.now()
       }));
 
-      showOk("Acesso autorizado. A redireccionar...");
-      window.location.href = `/?church=${church}`;
+      showOk("Acesso autorizado...");
+      setTimeout(() => {
+        window.location.href = `/?church=${church}`;
+      }, 300);
     }
 
     loginBtn.addEventListener("click", login);
     pinInput.addEventListener("keydown", (e) => {
       if (e.key === "Enter") login();
+    });
+
+    exitBtn.addEventListener("click", () => {
+      localStorage.removeItem("church_auth");
+      pinInput.value = "";
+      showError("");
+      showOk("");
+      window.location.href = "about:blank";
     });
   </script>
 </body>
